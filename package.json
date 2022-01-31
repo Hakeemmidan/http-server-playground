@@ -18,7 +18,7 @@
     "server"
   ],
   "scripts": {
-    "start": "node ./bin/http-server",
+    "start": "node ./bin/http-server . -p 1234 -c-1",
     "test": "tap --reporter=spec test/*.test.js",
     "test-watch": "tap --reporter=spec --watch test/*.test.js"
   },
