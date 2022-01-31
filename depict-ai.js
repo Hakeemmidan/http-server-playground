@@ -1,11 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable camelcase */
-// Before page render, don't display existing items in the list. Show them as white boxes.
-// Iterate over each item, lookup its depict counterpart.
-// Replace with returned result from depict.
-
-// First fetch using product-card class name
-// If that fails, lookup using card slider
 
 // eslint-disable-next-line max-statements
 async function render_depict_recommendations() {
@@ -19,7 +13,7 @@ async function render_depict_recommendations() {
 
   // 2. Get product ID
   /*
-    If it's not defined, log to depict to correlate store
+    If it's not defined, log to Depict to correlated store
   */
   const product_id = window.location.pathname.split('/').at(-2);
   if (!product_id) {
@@ -29,7 +23,7 @@ async function render_depict_recommendations() {
 
   // 3. Get depict.ai recommendations
   /*
-    If none returned, log to depict to corresponding store AND product ID
+    If none returned, log to Depict to corresponding store AND product ID
   */
   const recommendations = await get_recommendations(product_id);
   if (!recommendations || !recommendations.length) {
@@ -48,27 +42,35 @@ async function render_depict_recommendations() {
   );
   product_show_container.appendChild(horizontal_scroll_div);
 
-  // 4.3. Iterate over items and attach each to horizontal_scroll_div
+  // 4.3. Iterate over recommendation items and attach each to horizontal_scroll_div
   recommendations.forEach((recommendation) => {
+    // create container
     const recommendation_div = document.createElement('div');
-    recommendation_div.className = 'depict-recommendations__recommendation-item';
+    recommendation_div.className =
+      'depict-recommendations__recommendation-item';
     // create image
     const recommendation_img = document.createElement('img');
     recommendation_img.className = 'depict-recommendations__recommendation-img';
     recommendation_img.src = recommendation.image_url;
     // create title
     const recommendation_title = document.createElement('h3');
-    recommendation_title.className = 'depict-recommendations__recommendation-title';
+    recommendation_title.className =
+      'depict-recommendations__recommendation-title';
     recommendation_title.innerText = recommendation.title;
     // create price
     const recommendation_price = document.createElement('p');
-    recommendation_price.className = 'depict-recommendations__recommendation-price';
+    recommendation_price.className =
+      'depict-recommendations__recommendation-price';
     recommendation_price.innerText = recommendation.sale_price;
 
-    // add elements to recommendation_div
-    recommendation_div.append(recommendation_img, recommendation_title, recommendation_price);
+    // add elements to recommendation_div container
+    recommendation_div.append(
+      recommendation_img,
+      recommendation_title,
+      recommendation_price
+    );
 
-    // add to horizontal_scroll_div
+    // add finished recommendation_div item to horizontal_scroll_div
     horizontal_scroll_div.append(recommendation_div);
   });
 }
