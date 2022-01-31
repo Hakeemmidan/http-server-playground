@@ -83,7 +83,7 @@ async function get_recommendations(product_id) {
     user_id: get_depict_id(),
     dsid: get_depict_id(),
     document_referrer: document.referrer,
-    product_id,
+    product_id
   });
 
   let displays;
@@ -93,7 +93,7 @@ async function get_recommendations(product_id) {
       'https://api.depict.ai/v2/recommend/products/product',
       {
         body,
-        method: 'POST',
+        method: 'POST'
       }
     );
     const decoded_json = await response.json();
